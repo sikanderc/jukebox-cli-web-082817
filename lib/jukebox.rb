@@ -30,17 +30,17 @@ end
 def play(songs)
   puts "Please enter a song name or number:"
   user_response = gets.chomp
-  songs.each do |song|
-    if user_response == song || (user_response.to_i - 1) == songs.index(song)
-      puts "Playing #{song}"
-    else
-      puts "Invalid input, please try again"
-    end
+  if songs.include?(user_response)
+    puts "Playing #{user_response}"
+  elsif (1..9).to_a.include?(user_response.to_i)
+    puts "Playing #{songs[user_response.to_i - 1]}"
+  else
+    puts "Invalid input, please try again"
   end
 end
 
 def list(songs)
-  songs.each { |x| print "#{songs.index(x) + 1}. " + x}
+  songs.each_with_index { |x, i| puts "#{i+1}. #{x}" }
 end
 
 def exit_jukebox
